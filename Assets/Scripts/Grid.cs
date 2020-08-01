@@ -15,16 +15,6 @@ public class Grid : MonoBehaviour
         );
     }
 
-    private void Update()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            Debug.Log(WorldToGrid(hit.point));
-        }
-    }
-
     private void OnDrawGizmos()
     {
         for (int x = CellSize; x < 15 * CellSize; x += CellSize)
