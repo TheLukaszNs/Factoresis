@@ -11,8 +11,6 @@ public class CreateBuildings : MonoBehaviour
     [SerializeField] private int buildingType;
     [SerializeField] private string buildingTag;
 
-    private Vector3 currentPosition;
-
     private RaycastHit hit;
 
     private void Update()
@@ -35,7 +33,7 @@ public class CreateBuildings : MonoBehaviour
     {
         GameData.GridProperties.Add(gridScript.WorldToGrid(hit.point), buildingTag);
 
-        currentPosition = new Vector3(gridScript.WorldToGrid(hit.point).x, 0f, gridScript.WorldToGrid(hit.point).z);
+        Vector3 currentPosition = gridScript.WorldToGrid(hit.point);
 
         Instantiate(buildingObject, currentPosition, Quaternion.identity);
     }
