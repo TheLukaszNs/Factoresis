@@ -26,5 +26,4 @@ public class Grid : MonoBehaviour
             }
         }
     }
-
 }
