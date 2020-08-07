@@ -8,6 +8,7 @@ public class CreateBuildings : MonoBehaviour
 
     [SerializeField] private string tag;
 
+    private float buildingYPos;
     [SerializeField] private int buildingType;
     [SerializeField] private string buildingTag;
 
@@ -19,11 +20,19 @@ public class CreateBuildings : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (Input.GetMouseButtonDown(0) && !GameData.GridProperties.TryGetValue(gridScript.WorldToGrid(hit.point), out tag) && buildingTag != "")
+            if (Input.GetMouseButtonDown(0))
             {
-                if (tag == null)
+                if (buildingType == -1)
                 {
-                    PlaceBuilding(Buildings[buildingType]);
+                    RemoveBuilding();
+                }
+
+                if (!GameData.GridProperties.TryGetValue(gridScript.WorldToGrid(hit.point), out tag) && buildingTag != "")
+                {
+                    if (tag == null && buildingType >= 0)
+                    {
+                        PlaceBuilding(Buildings[buildingType]);
+                    }
                 }
             }
         }
@@ -34,12 +43,27 @@ public class CreateBuildings : MonoBehaviour
         GameData.GridProperties.Add(gridScript.WorldToGrid(hit.point), buildingTag);
 
         Vector3 currentPosition = gridScript.WorldToGrid(hit.point);
+        currentPosition.y = buildingYPos;
 
         Instantiate(buildingObject, currentPosition, Quaternion.identity);
     }
 
+    private void RemoveBuilding()
+    {
+        if (hit.collider != null)
+        {
+            if (hit.collider.name != "Plane")
+            {
+                Destroy(hit.collider.gameObject);
+
+                GameData.GridProperties.Remove(gridScript.WorldToGrid(hit.point));
+            }
+        }
+    }
+
     public void GetBuildingType(BuildingInfo info)
     {
+        buildingYPos = info.YPos;
         buildingType = info.buildingType;
         buildingTag = info.buildingTag;
     }
