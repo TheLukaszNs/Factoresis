@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CreateBuildings : MonoBehaviour
 {
-    [SerializeField] private Grid gridScript;
+    public Grid gridScript;
 
-    [SerializeField] private GameObject[] Buildings;
+    public GameObject[] Buildings;
 
-    [SerializeField] private string tag;
+    public GameData gameData;
+    private BuildingSO buildingSO;
+
+    [SerializeField] private string selectedTag;
 
     private float buildingYPos;
     [SerializeField] private int buildingType;
@@ -20,18 +24,25 @@ public class CreateBuildings : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                if (buildingType == -1)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    RemoveBuilding();
-                }
-
-                if (!GameData.GridProperties.TryGetValue(gridScript.WorldToGrid(hit.point), out tag) && buildingTag != "")
-                {
-                    if (tag == null && buildingType >= 0)
+                    if (buildingType == -1)
                     {
-                        PlaceBuilding(Buildings[buildingType]);
+                        RemoveBuilding();
+                    }
+
+                    if (!MapData.GridProperties.TryGetValue(gridScript.WorldToGrid(hit.point), out selectedTag) && buildingTag != "")
+                    {
+                        if (selectedTag == null && buildingType >= 0)
+                        {
+                            if (CheckIfRequirementsAreMet())
+                            {
+                                PlaceBuilding(Buildings[buildingType]);
+                                UseResources();
+                            }
+                        }
                     }
                 }
             }
@@ -40,7 +51,7 @@ public class CreateBuildings : MonoBehaviour
 
     private void PlaceBuilding(GameObject buildingObject)
     {
-        GameData.GridProperties.Add(gridScript.WorldToGrid(hit.point), buildingTag);
+        MapData.GridProperties.Add(gridScript.WorldToGrid(hit.point), buildingTag);
 
         Vector3 currentPosition = gridScript.WorldToGrid(hit.point);
         currentPosition.y = buildingYPos;
@@ -56,15 +67,37 @@ public class CreateBuildings : MonoBehaviour
             {
                 Destroy(hit.collider.gameObject);
 
-                GameData.GridProperties.Remove(gridScript.WorldToGrid(hit.point));
+                MapData.GridProperties.Remove(gridScript.WorldToGrid(hit.point));
             }
         }
     }
 
     public void GetBuildingType(BuildingInfo info)
     {
-        buildingYPos = info.YPos;
+        buildingYPos = info.yPos;
         buildingType = info.buildingType;
         buildingTag = info.buildingTag;
+
+        buildingSO = info.buildingSO;
+    }
+
+    private bool CheckIfRequirementsAreMet()
+    {
+        if (gameData.wood >= buildingSO.wood && gameData.stone >= buildingSO.stone && gameData.workers >= buildingSO.workers && gameData.gold >= buildingSO.gold)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void UseResources()
+    {
+        gameData.wood -= buildingSO.wood;
+        gameData.stone -= buildingSO.stone;
+        gameData.workers -= buildingSO.workers;
+        gameData.gold -= buildingSO.gold;
     }
 }
