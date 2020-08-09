@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    [SerializeField] private int CellSize = 1;
+    public int CellSize = 5;
 
     public Vector3 WorldToGrid(Vector3 position)
     {
@@ -13,17 +13,5 @@ public class Grid : MonoBehaviour
             0f,
             Mathf.RoundToInt(position.z / CellSize) * CellSize
         );
-    }
-
-    private void OnDrawGizmos()
-    {
-        for (int x = CellSize; x < 15 * CellSize; x += CellSize)
-        {
-            for (int y = 0; y < 15 * CellSize - CellSize; y += CellSize)
-            {
-                Gizmos.DrawLine(WorldToGrid(new Vector3(x - CellSize, 0f, y)), WorldToGrid(new Vector3(x, 0f, y)));
-                Gizmos.DrawLine(WorldToGrid(new Vector3(x, 0f, y)), WorldToGrid(new Vector3(x, 0f, y + CellSize)));
-            }
-        }
     }
 }
