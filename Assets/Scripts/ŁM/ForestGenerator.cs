@@ -22,6 +22,8 @@ public class ForestGenerator : MonoBehaviour
 
                         GameObject treeGO = Instantiate(tree.treePrefab, treePos, rotation);
                         treeGO.transform.SetParent(forest);
+
+                        MapData.GridProperties.Add(treePos, "Tree");
                         break;
                     }
                 }

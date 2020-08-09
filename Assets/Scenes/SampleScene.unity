@@ -633,10 +633,10 @@ MonoBehaviour:
   trees:
   - name: Pine
     treePrefab: {fileID: 100522688288222250, guid: 9a69fbd0a2fa5764d91a4295ac6a9c00, type: 3}
-    spawnRate: 0.1
+    spawnRate: 0.15
   - name: Maple
     treePrefab: {fileID: 1388265935483055053, guid: 04237adef76d8c24d9db0ec732b54576, type: 3}
-    spawnRate: 0.15
+    spawnRate: 0.1
   grid: {fileID: 219474767}
   forest: {fileID: 498255}
 --- !u!1 &730027939
@@ -765,7 +765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0.8191521, z: -0.5735764, w: 0}
-  m_LocalPosition: {x: 0, y: 120.9, z: 57.5}
+  m_LocalPosition: {x: 0, y: 160, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -806,7 +806,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
