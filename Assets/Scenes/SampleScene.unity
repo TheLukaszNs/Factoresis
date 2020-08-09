@@ -603,10 +603,14 @@ MonoBehaviour:
   trees:
   - name: Pine
     treePrefab: {fileID: 100522688288222250, guid: 9a69fbd0a2fa5764d91a4295ac6a9c00, type: 3}
-    spawnRate: 0.39
+    spawnRate: 0.15
   - name: Maple
     treePrefab: {fileID: 1388265935483055053, guid: 04237adef76d8c24d9db0ec732b54576, type: 3}
-    spawnRate: 0.5
+    spawnRate: 0.1
+  xPos: -75
+  zPos: -75
+  xLimit: 80
+  zLimit: 80
 --- !u!1 &730027939
 GameObject:
   m_ObjectHideFlags: 0
