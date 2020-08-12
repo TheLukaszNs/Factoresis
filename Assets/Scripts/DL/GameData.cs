@@ -2,9 +2,12 @@
 
 public class GameData : MonoBehaviour
 {
-    [Header("Resources")]
-    public int wood;
-    public int stone;
-    public int workers;
-    public int gold;
+    public Resources[] resources;
+
+    [System.Serializable]
+    public class Resources
+    {
+        public string resourceName;
+        public int resourceAmount;
+    }
 }

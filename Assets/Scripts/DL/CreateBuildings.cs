@@ -5,99 +5,133 @@ public class CreateBuildings : MonoBehaviour
 {
     public Grid gridScript;
 
-    public GameObject[] Buildings;
-
-    public GameData gameData;
-    private BuildingSO buildingSO;
-
-    [SerializeField] private string selectedTag;
-
-    private float buildingYPos;
-    [SerializeField] private int buildingType;
-    [SerializeField] private string buildingTag;
+    [HideInInspector] public Vector3 currentPosition;
 
     private RaycastHit hit;
 
+    [Header("Building Objects")]
+    public GameObject[] Buildings;
+    [SerializeField] private Transform BuildingsParent;
+
+    [Header("Game Data")]
+    public GameData gameData;
+    [SerializeField] private BuildingSO buildingSO;
+
+    [Header("Building Properties")]
+    [SerializeField] private float buildingYPos;
+    public int buildingType;
+    public string buildingTag;
+
     private void Update()
     {
+        RaycastCheck();
+    }
+
+    private void RaycastCheck()
+    {
+        // Position for the building preview in ShowBuildingPlacement.
+        currentPosition = gridScript.WorldToGrid(hit.point);
+        currentPosition.y = buildingYPos;
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
-        {
             if (!EventSystem.current.IsPointerOverGameObject())
-            {
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (buildingType == -1)
-                    {
                         RemoveBuilding();
-                    }
 
-                    if (!MapData.GridProperties.TryGetValue(gridScript.WorldToGrid(hit.point), out selectedTag) && buildingTag != "")
-                    {
-                        if (selectedTag == null && buildingType >= 0)
-                        {
-                            if (CheckIfRequirementsAreMet())
+                    if (hit.collider.tag == "IgnoreRaycast")
+                        if (buildingType >= 0)
+                            if (CheckIfThereIsPlaceForBuilding() && CheckIfRequirementsAreMet())
                             {
                                 PlaceBuilding(Buildings[buildingType]);
                                 UseResources();
                             }
-                        }
-                    }
                 }
-            }
-        }
     }
 
     private void PlaceBuilding(GameObject buildingObject)
     {
-        MapData.GridProperties.Add(gridScript.WorldToGrid(hit.point), buildingTag);
-
-        Vector3 currentPosition = gridScript.WorldToGrid(hit.point);
-        currentPosition.y = buildingYPos;
-
-        Instantiate(buildingObject, currentPosition, Quaternion.identity);
+        GameObject BuildingGO = Instantiate(buildingObject, currentPosition, Quaternion.identity);
+        BuildingGO.transform.SetParent(BuildingsParent);
     }
 
     private void RemoveBuilding()
     {
         if (hit.collider != null)
         {
-            if (hit.collider.name != "Plane")
+            if (hit.collider.tag != "IgnoreRaycast")
             {
                 Destroy(hit.collider.gameObject);
-
-                MapData.GridProperties.Remove(gridScript.WorldToGrid(hit.point));
             }
         }
     }
 
-    public void GetBuildingType(BuildingInfo info)
+    public void GetBuildingType(BuildingSO buildingInfo)
     {
-        buildingYPos = info.yPos;
-        buildingType = info.buildingType;
-        buildingTag = info.buildingTag;
+        buildingSO = buildingInfo;
 
-        buildingSO = info.buildingSO;
+        buildingYPos = buildingSO.yPos;
+        buildingType = buildingSO.buildingType;
+        buildingTag = buildingSO.buildingTag;
     }
 
     private bool CheckIfRequirementsAreMet()
     {
-        if (gameData.wood >= buildingSO.wood && gameData.stone >= buildingSO.stone && gameData.workers >= buildingSO.workers && gameData.gold >= buildingSO.gold)
+        bool result = false;
+
+        for (int i = 0; i < gameData.resources.Length; i++)
         {
-            return true;
+            if (gameData.resources[i].resourceAmount >= buildingSO.req[i].resourceAmount)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+                break;
+            }
         }
-        else
-        {
-            return false;
-        }
+
+        return result;
     }
 
     private void UseResources()
     {
-        gameData.wood -= buildingSO.wood;
-        gameData.stone -= buildingSO.stone;
-        gameData.workers -= buildingSO.workers;
-        gameData.gold -= buildingSO.gold;
+        for (int i = 0; i < gameData.resources.Length; i++)
+        {
+            gameData.resources[i].resourceAmount -= buildingSO.req[i].resourceAmount;
+        }
+    }
+
+    private bool CheckIfThereIsPlaceForBuilding()
+    {
+        bool result = false;
+
+        Collider[] colliders = Physics.OverlapBox(gridScript.WorldToGrid(hit.point), Buildings[buildingType].transform.localScale * 0.9f);
+
+        if (colliders != null)
+        {
+            foreach (Collider coll in colliders)
+            {
+                if (coll.tag == "Collider")
+                {
+                    result = false;
+                    break;
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+        }
+        else
+        {
+            result = true;
+        }
+
+        return result;
     }
 }

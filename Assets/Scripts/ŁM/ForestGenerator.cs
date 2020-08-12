@@ -19,10 +19,10 @@ public class ForestGenerator : MonoBehaviour
                         Vector3 treePos = grid.WorldToGrid(new Vector3(x, 0f, z));
                         Quaternion rotation = Quaternion.Euler(0f, Random.Range(0, 360f), 0f);
 
-                        GameObject treeGO = Instantiate(tree.treePrefab, treePos, rotation);
-                        treeGO.transform.SetParent(forest);
+                        GameObject treeGO = Instantiate(tree.treePrefab, treePos, Quaternion.identity);
+                        tree.treePrefab.transform.Find("TreeMesh").rotation = rotation;
 
-                        MapData.GridProperties.Add(treePos, "Tree");
+                        treeGO.transform.SetParent(forest);
                         break;
                     }
                 }

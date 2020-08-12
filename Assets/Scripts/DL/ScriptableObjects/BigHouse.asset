@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56a02bd8ca06d7543bb444b93112df2d, type: 3}
-  m_Name: House
+  m_Name: BigHouse
   m_EditorClassIdentifier: 
-  yPos: 2
-  buildingType: 0
-  buildingTag: House
+  yPos: 3.78
+  buildingType: 1
+  buildingTag: BigHouse
   req:
   - resourceName: Wood
-    resourceAmount: 10
+    resourceAmount: 20
   - resourceName: Stone
-    resourceAmount: 5
+    resourceAmount: 10
   - resourceName: Workers
-    resourceAmount: 5
+    resourceAmount: 10
   - resourceName: Gold
     resourceAmount: 0

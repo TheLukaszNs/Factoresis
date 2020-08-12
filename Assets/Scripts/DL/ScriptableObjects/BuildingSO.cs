@@ -13,8 +13,12 @@ public class BuildingSO : ScriptableObject
     public string buildingTag;
 
     [Header("Requirements")]
-    public int wood;
-    public int stone;
-    public int workers;
-    public int gold;
+    public ResourcesRequired[] req;
+
+    [System.Serializable]
+    public class ResourcesRequired
+    {
+        public string resourceName;
+        public int resourceAmount;
+    }
 }
