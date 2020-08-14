@@ -2,12 +2,27 @@
 
 public class GameData : MonoBehaviour
 {
-    public Resources[] resources;
-
-    [System.Serializable]
-    public class Resources
+    #region Singleton
+    private static GameData _instance;
+    public static GameData Instance
     {
-        public string resourceName;
-        public int resourceAmount;
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject newInstance = new GameObject("GameData");
+                newInstance.AddComponent<GameData>();
+            }
+
+            return _instance;
+        }
     }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+    #endregion
+
+    public Resources[] playerResources;
 }

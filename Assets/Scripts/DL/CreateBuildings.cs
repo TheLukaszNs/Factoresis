@@ -5,17 +5,15 @@ public class CreateBuildings : MonoBehaviour
 {
     public Grid gridScript;
 
+    [SerializeField] private Transform BuildingsParent;
+
     [HideInInspector] public Vector3 currentPosition;
 
     private RaycastHit hit;
 
-    [Header("Building Objects")]
-    public GameObject[] Buildings;
-    [SerializeField] private Transform BuildingsParent;
-
     [Header("Game Data")]
     public GameData gameData;
-    [SerializeField] private BuildingSO buildingSO;
+    public BuildingSO buildingSO;
 
     [Header("Building Properties")]
     [SerializeField] private float buildingYPos;
@@ -46,7 +44,7 @@ public class CreateBuildings : MonoBehaviour
                         if (buildingType >= 0)
                             if (CheckIfThereIsPlaceForBuilding() && CheckIfRequirementsAreMet())
                             {
-                                PlaceBuilding(Buildings[buildingType]);
+                                PlaceBuilding(buildingSO.Building);
                                 UseResources();
                             }
                 }
@@ -82,9 +80,9 @@ public class CreateBuildings : MonoBehaviour
     {
         bool result = false;
 
-        for (int i = 0; i < gameData.resources.Length; i++)
+        for (int i = 0; i < gameData.playerResources.Length; i++)
         {
-            if (gameData.resources[i].resourceAmount >= buildingSO.req[i].resourceAmount)
+            if (gameData.playerResources[i].resourceAmount >= buildingSO.requiredResources[i].resourceAmount)
             {
                 result = true;
             }
@@ -100,9 +98,9 @@ public class CreateBuildings : MonoBehaviour
 
     private void UseResources()
     {
-        for (int i = 0; i < gameData.resources.Length; i++)
+        for (int i = 0; i < gameData.playerResources.Length; i++)
         {
-            gameData.resources[i].resourceAmount -= buildingSO.req[i].resourceAmount;
+            gameData.playerResources[i].resourceAmount -= buildingSO.requiredResources[i].resourceAmount;
         }
     }
 
@@ -110,7 +108,7 @@ public class CreateBuildings : MonoBehaviour
     {
         bool result = false;
 
-        Collider[] colliders = Physics.OverlapBox(gridScript.WorldToGrid(hit.point), Buildings[buildingType].transform.localScale * 0.9f);
+        Collider[] colliders = Physics.OverlapBox(gridScript.WorldToGrid(hit.point), buildingSO.Building.transform.localScale * 0.9f);
 
         if (colliders != null)
         {

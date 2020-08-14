@@ -4,9 +4,9 @@ public class ShowBuildingPlacement : MonoBehaviour
 {
     private CreateBuildings MainScript;
 
-    [SerializeField] private GameObject[] Buildings;
+    [SerializeField] private GameObject FieldSelection;
 
-    [SerializeField] private Vector3 newBuildingPos;
+    private Vector3 newBuildingPos;
 
     void Start()
     {
@@ -17,28 +17,16 @@ public class ShowBuildingPlacement : MonoBehaviour
     {
         newBuildingPos = MainScript.currentPosition;
 
-        if (MainScript.buildingType == -1)
+        if (MainScript.buildingType > -1)
         {
-            for (int i = 0; i < Buildings.Length; i++)
-            {
-                Buildings[i].SetActive(false);
-            }
+            FieldSelection.SetActive(true);
+
+            FieldSelection.transform.position = new Vector3(newBuildingPos.x, FieldSelection.transform.position.y, newBuildingPos.z);
+            FieldSelection.transform.localScale = new Vector3(MainScript.buildingSO.Building.transform.lossyScale.x * 2, FieldSelection.transform.localScale.y, MainScript.buildingSO.Building.transform.lossyScale.z * 2);
         }
         else
         {
-            for (int i = 0; i < Buildings.Length; i++)
-            {
-                if (i == MainScript.buildingType && MainScript.buildingTag != "")
-                {
-                    Buildings[i].SetActive(true);
-
-                    Buildings[i].transform.position = new Vector3(newBuildingPos.x, Buildings[i].transform.position.y, newBuildingPos.z);
-                }
-                else
-                {
-                    Buildings[i].SetActive(false);
-                }
-            }
+            FieldSelection.SetActive(false);
         }
     }
 }

@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a02bd8ca06d7543bb444b93112df2d, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
+  Building: {fileID: 5352320503184487871, guid: fa0042d755daa254f92b1cf199fe3f2a, type: 3}
   yPos: 2
   buildingType: 0
   buildingTag: House
-  req:
+  requiredResources:
   - resourceName: Wood
-    resourceAmount: 10
+    resourceAmount: 20
   - resourceName: Stone
-    resourceAmount: 5
+    resourceAmount: 10
   - resourceName: Workers
     resourceAmount: 5
   - resourceName: Gold
-    resourceAmount: 0
+    resourceAmount: 10

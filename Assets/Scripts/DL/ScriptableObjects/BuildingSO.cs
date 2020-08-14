@@ -3,6 +3,9 @@
 [CreateAssetMenu(fileName = "ExampleBuilding", menuName = "BuildingInfos")]
 public class BuildingSO : ScriptableObject
 {
+    [Header("Building GameObject")]
+    public GameObject Building;
+
     [Header("Transform")]
     public float yPos;
 
@@ -13,12 +16,5 @@ public class BuildingSO : ScriptableObject
     public string buildingTag;
 
     [Header("Requirements")]
-    public ResourcesRequired[] req;
-
-    [System.Serializable]
-    public class ResourcesRequired
-    {
-        public string resourceName;
-        public int resourceAmount;
-    }
+    public Resources[] requiredResources;
 }
