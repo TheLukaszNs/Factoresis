@@ -3,17 +3,9 @@
 public class CelestialBodyMovement : MonoBehaviour
 {
     [Range(0.1f, 2.0f)]
-    [SerializeField] private float rotationSpeed;
+    public float rotationSpeed;
 
     [SerializeField] private float xRot;
-
-    private enum CelestialBodyType
-    {
-        sun,
-        moon
-    }
-
-    [SerializeField] private CelestialBodyType celestialBodyType;
 
     private void Update()
     {
@@ -29,7 +21,7 @@ public class CelestialBodyMovement : MonoBehaviour
 
     private float IncreaseRotationValue(float rot)
     {
-        rot = Mathf.Lerp(rot, rot + 10, Time.deltaTime * rotationSpeed);
+        rot = rot + 10 * Time.deltaTime * rotationSpeed;
 
         if (rot >= 360)
             rot = 0;

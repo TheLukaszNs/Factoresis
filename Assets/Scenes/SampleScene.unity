@@ -353,9 +353,11 @@ GameObject:
   - component: {fileID: 185639861}
   - component: {fileID: 185639860}
   - component: {fileID: 185639859}
+  - component: {fileID: 185639858}
+  - component: {fileID: 185639862}
   m_Layer: 5
   m_Name: House
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,6 +381,32 @@ RectTransform:
   m_AnchoredPosition: {x: -130, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &185639858
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185639856}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50}
+  m_EdgeRadius: 0
 --- !u!114 &185639859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,12 +451,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 498890177}
-        m_TargetAssemblyTypeName: CreateBuildings, Assembly-CSharp
+        m_TargetAssemblyTypeName: CursorInteractionManager, Assembly-CSharp
         m_MethodName: GetBuildingType
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e0c292cfdccb1d245b31e00c9e6a97c6, type: 2}
-          m_ObjectArgumentAssemblyTypeName: BuildingSO, Assembly-CSharp
+          m_ObjectArgument: {fileID: 185639862}
+          m_ObjectArgumentAssemblyTypeName: Building, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -472,6 +500,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185639856}
   m_CullTransparentMesh: 0
+--- !u!114 &185639862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185639856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87b2a1d70306dc4aaf12fff6d344140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemove: 0
+  buildingName: House
+  buildingType: 0
+  prefab: {fileID: 5352320503184487871, guid: fa0042d755daa254f92b1cf199fe3f2a, type: 3}
+  requiredResources:
+  - resourceName: Wood
+    resourceAmount: 10
+  - resourceName: Workers
+    resourceAmount: 10
 --- !u!1 &219474766
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +762,9 @@ GameObject:
   m_Component:
   - component: {fileID: 498890178}
   - component: {fileID: 498890177}
+  - component: {fileID: 498890181}
   - component: {fileID: 498890179}
+  - component: {fileID: 498890180}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -737,10 +788,7 @@ MonoBehaviour:
   BuildingsParent: {fileID: 669643711}
   currentPosition: {x: 0, y: 0, z: 0}
   gameData: {fileID: 730027940}
-  buildingSO: {fileID: 0}
-  buildingYPos: 0
-  buildingType: -1
-  buildingTag: 
+  buildingInfo: {fileID: 1462286612}
 --- !u!4 &498890178
 Transform:
   m_ObjectHideFlags: 0
@@ -769,6 +817,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FieldSelection: {fileID: 385407859}
+--- !u!114 &498890180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498890176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b3e0485ca450249a42fe61935c7ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectInfoText: {fileID: 1209987422}
+  objectResources: []
+--- !u!114 &498890181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498890176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d004f99fe4cde4d99a092939e106f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &506100720
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,11 +1004,11 @@ MonoBehaviour:
   - resourceName: Wood
     resourceAmount: 1000
   - resourceName: Stone
-    resourceAmount: 500
+    resourceAmount: 1000
   - resourceName: Workers
-    resourceAmount: 500
+    resourceAmount: 1000
   - resourceName: Gold
-    resourceAmount: 2000
+    resourceAmount: 1000
 --- !u!4 &730027941
 Transform:
   m_ObjectHideFlags: 0
@@ -993,9 +1067,11 @@ GameObject:
   - component: {fileID: 951998907}
   - component: {fileID: 951998906}
   - component: {fileID: 951998905}
+  - component: {fileID: 951998904}
+  - component: {fileID: 951998908}
   m_Layer: 5
   m_Name: BigHouse
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1019,6 +1095,32 @@ RectTransform:
   m_AnchoredPosition: {x: -55, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &951998904
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951998902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50}
+  m_EdgeRadius: 0
 --- !u!114 &951998905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,12 +1165,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 498890177}
-        m_TargetAssemblyTypeName: CreateBuildings, Assembly-CSharp
+        m_TargetAssemblyTypeName: CursorInteractionManager, Assembly-CSharp
         m_MethodName: GetBuildingType
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: d87307491db35944490f7b0960797f24, type: 2}
-          m_ObjectArgumentAssemblyTypeName: BuildingSO, Assembly-CSharp
+          m_ObjectArgument: {fileID: 951998908}
+          m_ObjectArgumentAssemblyTypeName: Building, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1112,6 +1214,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951998902}
   m_CullTransparentMesh: 0
+--- !u!114 &951998908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951998902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87b2a1d70306dc4aaf12fff6d344140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemove: 0
+  buildingName: Big House
+  buildingType: 1
+  prefab: {fileID: 5352320503184487871, guid: a2d8c1f614b0ef748986e8b0b2d3a25c, type: 3}
+  requiredResources:
+  - resourceName: Wood
+    resourceAmount: 20
+  - resourceName: Stone
+    resourceAmount: 10
+  - resourceName: Workers
+    resourceAmount: 20
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1431,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1134946491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1134946492}
+  m_Layer: 5
+  m_Name: CursorInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1134946492
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134946491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1422474725}
+  m_Father: {fileID: 1952332252}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1189365609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,8 +1513,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   xRot: 0
-  celestialBodyLight: {fileID: 0}
-  celestialBodyType: 0
+--- !u!1 &1209987420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209987421}
+  - component: {fileID: 1209987423}
+  - component: {fileID: 1209987422}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1209987421
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209987420}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1422474725}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 60}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1209987422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209987420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 12
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1209987423
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209987420}
+  m_CullTransparentMesh: 0
 --- !u!1 &1308912636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,7 +1778,7 @@ GameObject:
   - component: {fileID: 1388617634}
   - component: {fileID: 1388617638}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: BuildingMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1661,6 +1899,82 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 500, y: 60}
   m_EdgeRadius: 0
+--- !u!1 &1422474724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422474725}
+  - component: {fileID: 1422474727}
+  - component: {fileID: 1422474726}
+  m_Layer: 5
+  m_Name: BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1422474725
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422474724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1209987421}
+  m_Father: {fileID: 1134946492}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: -60}
+  m_SizeDelta: {x: 140, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1422474726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422474724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1422474727
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422474724}
+  m_CullTransparentMesh: 0
 --- !u!1 &1462286610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,6 +1987,7 @@ GameObject:
   - component: {fileID: 1462286615}
   - component: {fileID: 1462286614}
   - component: {fileID: 1462286613}
+  - component: {fileID: 1462286612}
   m_Layer: 5
   m_Name: Remove
   m_TagString: Untagged
@@ -1699,6 +2014,23 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1462286612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462286610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87b2a1d70306dc4aaf12fff6d344140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemove: 1
+  buildingName: Remove
+  buildingType: -1
+  prefab: {fileID: 0}
+  requiredResources: []
 --- !u!114 &1462286613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1743,12 +2075,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 498890177}
-        m_TargetAssemblyTypeName: CreateBuildings, Assembly-CSharp
+        m_TargetAssemblyTypeName: CursorInteractionManager, Assembly-CSharp
         m_MethodName: GetBuildingType
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 59d186190e3df0a4194fd102f1dcac7c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: BuildingSO, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1462286612}
+          m_ObjectArgumentAssemblyTypeName: Building, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1884,6 +2216,7 @@ RectTransform:
   m_Children:
   - {fileID: 2136424887}
   - {fileID: 1388617633}
+  - {fileID: 1134946492}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1923,8 +2256,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   xRot: 180
-  celestialBodyLight: {fileID: 0}
-  celestialBodyType: 1
 --- !u!4 &2018241613
 Transform:
   m_ObjectHideFlags: 0

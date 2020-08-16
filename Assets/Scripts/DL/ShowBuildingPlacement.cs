@@ -2,27 +2,29 @@
 
 public class ShowBuildingPlacement : MonoBehaviour
 {
-    private CreateBuildings MainScript;
+    private CursorInteractionManager MainScript;
 
-    [SerializeField] private GameObject FieldSelection;
+    public GameObject FieldSelection;
 
     private Vector3 newBuildingPos;
 
     void Start()
     {
-        MainScript = GetComponent<CreateBuildings>();
+        MainScript = GetComponent<CursorInteractionManager>();
     }
 
     void Update()
     {
+        int buildingType = MainScript.buildingInfo.buildingType;
+
         newBuildingPos = MainScript.currentPosition;
 
-        if (MainScript.buildingType > -1)
+        if (buildingType > -1)
         {
             FieldSelection.SetActive(true);
 
             FieldSelection.transform.position = new Vector3(newBuildingPos.x, FieldSelection.transform.position.y, newBuildingPos.z);
-            FieldSelection.transform.localScale = new Vector3(MainScript.buildingSO.Building.transform.lossyScale.x * 2, FieldSelection.transform.localScale.y, MainScript.buildingSO.Building.transform.lossyScale.z * 2);
+            FieldSelection.transform.localScale = new Vector3(MainScript.buildingInfo.prefab.transform.lossyScale.x * 2, FieldSelection.transform.localScale.y, MainScript.buildingInfo.prefab.transform.lossyScale.z * 2);
         }
         else
         {
