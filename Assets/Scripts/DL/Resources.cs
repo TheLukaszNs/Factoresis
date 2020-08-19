@@ -1,10 +1,18 @@
-﻿[System.Serializable]
+﻿public enum ResourceNames
+{
+    Wood,
+    Stone,
+    Workers,
+    Gold
+}
+
+[System.Serializable]
 public class Resources
 {
-    public string resourceName;
+    public ResourceNames resourceName;
     public int resourceAmount;
 
-    public Resources(string name, int amount)
+    public Resources(ResourceNames name, int amount)
     {
         resourceName = name;
         resourceAmount = amount;

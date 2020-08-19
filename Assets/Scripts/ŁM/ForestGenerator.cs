@@ -25,8 +25,8 @@ public class ForestGenerator : MonoBehaviour
                         tree.treePrefab.transform.Find("TreeMesh").rotation = rotation;
 
                         treeGO.AddComponent<ObjectResources>();
-                        treeGO.GetComponent<ObjectResources>().resources.Add(new Resources("Wood", Random.Range(5, 20)));
-                        treeGO.GetComponent<ObjectResources>().resources.Add(new Resources("Workers", -10));
+                        treeGO.GetComponent<ObjectResources>().resources.Add(new Resources(ResourceNames.Wood, Random.Range(5, 20)));
+                        treeGO.GetComponent<ObjectResources>().resources.Add(new Resources(ResourceNames.Workers, -10));
 
                         treeGO.transform.SetParent(forest);
                         break;

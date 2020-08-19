@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CursorInteractionManager : MonoBehaviour
+public class BuildingManager : MonoBehaviour
 {
     public Grid gridScript;
 
@@ -13,7 +13,7 @@ public class CursorInteractionManager : MonoBehaviour
 
     [Header("Game Data")]
     public GameData gameData;
-    public Building buildingInfo;
+    public BuildingInfo buildingInfo;
 
     private void Update()
     {
@@ -53,9 +53,25 @@ public class CursorInteractionManager : MonoBehaviour
     {
         GameObject BuildingGO = Instantiate(buildingObject, currentPosition, Quaternion.identity);
         BuildingGO.transform.SetParent(BuildingsParent);
+
+        BuildingEffects();
     }
 
-    public void GetBuildingType(Building buildingInfoScript)
+    private void BuildingEffects()
+    {
+        for (int i = 0; i < gameData.resourcesGatheredPerDay.Length; i++)
+        {
+            for (int p = 0; p < buildingInfo.resourcesBuilding.resourcesGatheredPerDay.Length; p++)
+            {
+                if (gameData.resourcesGatheredPerDay[i].resourceName == buildingInfo.resourcesBuilding.resourcesGatheredPerDay[p].resourceName)
+                {
+                    gameData.resourcesGatheredPerDay[i].resourceAmount += buildingInfo.resourcesBuilding.resourcesGatheredPerDay[p].resourceAmount;
+                }
+            }
+        }
+    }
+
+    public void GetBuildingType(BuildingInfo buildingInfoScript)
     {
         buildingInfo = buildingInfoScript;
     }
@@ -112,7 +128,7 @@ public class CursorInteractionManager : MonoBehaviour
         {
             foreach (Collider coll in colliders)
             {
-                if (coll.tag == "Collider")
+                if (coll.tag == "Collider") 
                 {
                     result = false;
                     break;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameData : MonoBehaviour
+public class GameData : MonoBehaviour, IDayPassed
 {
     #region Singleton
     private static GameData _instance;
@@ -18,11 +18,20 @@ public class GameData : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         _instance = this;
     }
     #endregion
 
     public Resources[] playerResources;
+    public Resources[] resourcesGatheredPerDay;
+
+    public void DayPassed()
+    {
+        for (int i = 0; i < playerResources.Length; i++)
+        {
+            playerResources[i].resourceAmount += resourcesGatheredPerDay[i].resourceAmount;
+        }
+    }
 }
