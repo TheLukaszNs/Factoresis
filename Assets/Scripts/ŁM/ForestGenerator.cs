@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ForestGenerator : MonoBehaviour
 {
-    public List<TreeType> trees = new List<TreeType>();
+    public List<ObjectType> mapObjects = new List<ObjectType>();
     public Grid grid;
     public Transform forest;
 
@@ -14,21 +14,26 @@ public class ForestGenerator : MonoBehaviour
         for (float x = -100f; x <= 100f; x += grid.CellSize)
             for (float z = -100f; z <= 100f; z += grid.CellSize)
             {
-                foreach (TreeType tree in trees)
+                foreach (ObjectType mapObject in mapObjects)
                 {
-                    if (Random.value <= tree.spawnRate)
+                    mapObject.objectPrefab.tag = "Resources";
+
+                    if (Random.value <= mapObject.spawnRate)
                     {
-                        Vector3 treePos = grid.WorldToGrid(new Vector3(x, 0f, z));
+                        Vector3 objectPos = grid.WorldToGrid(new Vector3(x, 0f, z));
                         Quaternion rotation = Quaternion.Euler(0f, Random.Range(0, 360f), 0f);
 
-                        GameObject treeGO = Instantiate(tree.treePrefab, treePos, Quaternion.identity);
-                        tree.treePrefab.transform.Find("TreeMesh").rotation = rotation;
+                        GameObject objectGO = Instantiate(mapObject.objectPrefab, objectPos, Quaternion.identity);
+                        mapObject.objectPrefab.GetComponentInChildren<Transform>().transform.rotation = rotation;
 
-                        treeGO.AddComponent<ObjectResources>();
-                        treeGO.GetComponent<ObjectResources>().resources.Add(new Resources(ResourceNames.Wood, Random.Range(5, 20)));
-                        treeGO.GetComponent<ObjectResources>().resources.Add(new Resources(ResourceNames.Workers, -10));
+                        objectGO.AddComponent<ObjectResources>();
 
-                        treeGO.transform.SetParent(forest);
+                        for (int i = 0; i < mapObject.resources.Length; i++)
+                        {
+                            objectGO.GetComponent<ObjectResources>().resources.Add(mapObject.resources[i]);
+                        }
+
+                        objectGO.transform.SetParent(forest);
                         break;
                     }
                 }
@@ -37,9 +42,11 @@ public class ForestGenerator : MonoBehaviour
 }
 
 [System.Serializable]
-public class TreeType
+public class ObjectType
 {
     public string name;
-    public GameObject treePrefab;
+    public GameObject objectPrefab;
     public float spawnRate = .1f;
+
+    public Resources[] resources;
 }

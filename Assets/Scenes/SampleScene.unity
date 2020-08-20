@@ -879,13 +879,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc00d3ba10f264b48980fb21f5224cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trees:
-  - name: Pine
-    treePrefab: {fileID: 796950159436281656, guid: 72ccd91f1fb35be4fb278e6248d486ee, type: 3}
-    spawnRate: 0.01
+  mapObjects:
   - name: Maple
-    treePrefab: {fileID: 5958274758762299840, guid: ccec08103701afb41b2dfb4edb4fdd6e, type: 3}
+    objectPrefab: {fileID: 5958274758762299840, guid: ccec08103701afb41b2dfb4edb4fdd6e, type: 3}
+    spawnRate: 0.015
+    resources:
+    - resourceName: 0
+      resourceAmount: 20
+    - resourceName: 2
+      resourceAmount: -10
+  - name: Pine
+    objectPrefab: {fileID: 796950159436281656, guid: 72ccd91f1fb35be4fb278e6248d486ee, type: 3}
+    spawnRate: 0.02
+    resources:
+    - resourceName: 0
+      resourceAmount: 20
+    - resourceName: 2
+      resourceAmount: -10
+  - name: Rock
+    objectPrefab: {fileID: 2778507296596352311, guid: b91974567ce1a6f4e927b1c49919ba53, type: 3}
     spawnRate: 0.01
+    resources:
+    - resourceName: 1
+      resourceAmount: 20
+    - resourceName: 2
+      resourceAmount: -10
   grid: {fileID: 219474767}
   forest: {fileID: 498255}
 --- !u!1 &607211403
@@ -1458,7 +1476,7 @@ MonoBehaviour:
   - CelestialBodyTR: {fileID: 2018241613}
     isSun: 0
     xRot: 180
-  rotationSpeed: 1
+  rotationSpeed: 0.28
 --- !u!1 &1134946491
 GameObject:
   m_ObjectHideFlags: 0
