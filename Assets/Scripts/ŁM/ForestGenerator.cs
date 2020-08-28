@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ForestGenerator : MonoBehaviour
 {
+    public float mapSize;
+
     public List<ObjectType> mapObjects = new List<ObjectType>();
     public Grid grid;
     public Transform forest;
@@ -11,8 +13,8 @@ public class ForestGenerator : MonoBehaviour
     {
         Random.InitState(System.DateTime.Now.Millisecond);
 
-        for (float x = -100f; x <= 100f; x += grid.CellSize)
-            for (float z = -100f; z <= 100f; z += grid.CellSize)
+        for (float x = -mapSize; x <= mapSize; x += grid.CellSize)
+            for (float z = -mapSize; z <= mapSize; z += grid.CellSize)
             {
                 foreach (ObjectType mapObject in mapObjects)
                 {
@@ -48,5 +50,5 @@ public class ObjectType
     public GameObject objectPrefab;
     public float spawnRate = .1f;
 
-    public Resources[] resources;
+    public Resource[] resources;
 }

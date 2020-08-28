@@ -7,12 +7,12 @@
 }
 
 [System.Serializable]
-public class Resources
+public class Resource
 {
     public ResourceNames resourceName;
     public int resourceAmount;
 
-    public Resources(ResourceNames name, int amount)
+    public Resource(ResourceNames name, int amount)
     {
         resourceName = name;
         resourceAmount = amount;

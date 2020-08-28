@@ -13,12 +13,12 @@ public class BuildingInfo : MonoBehaviour
 
     [Header("Resources information")]
 
-    public Resources[] requiredResources;
+    public Resource[] requiredResources;
     public ResourcesBuilding resourcesBuilding;
 }
 
 [System.Serializable]
 public class ResourcesBuilding
 {
-    public Resources[] resourcesGatheredPerDay;
+    public Resource[] resourcesGatheredPerDay;
 }

@@ -24,8 +24,8 @@ public class GameData : MonoBehaviour, IDayPassed
     }
     #endregion
 
-    public Resources[] playerResources;
-    public Resources[] resourcesGatheredPerDay;
+    public Resource[] playerResources;
+    public Resource[] resourcesGatheredPerDay;
 
     public void DayPassed()
     {

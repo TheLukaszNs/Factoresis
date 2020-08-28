@@ -7,9 +7,8 @@ public class BuildingManager : MonoBehaviour
 
     public Transform BuildingsParent;
 
-    [HideInInspector] public Vector3 currentPosition;
-
-    private RaycastHit hit;
+    [HideInInspector] public RaycastHit hit;
+    [HideInInspector] public Quaternion buildingRot;
 
     [Header("Game Data")]
     public GameData gameData;
@@ -23,9 +22,6 @@ public class BuildingManager : MonoBehaviour
     #region Building Section
     private void RaycastCheck()
     {
-        // Position for the building preview in ShowBuildingPlacement.
-        currentPosition = gridScript.WorldToGrid(hit.point);
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
@@ -51,7 +47,12 @@ public class BuildingManager : MonoBehaviour
 
     private void PlaceBuilding(GameObject buildingObject)
     {
-        GameObject BuildingGO = Instantiate(buildingObject, currentPosition, Quaternion.identity);
+        Vector3 currentPosition;
+
+        currentPosition = gridScript.WorldToGrid(hit.point);
+        currentPosition.y = buildingInfo.prefab.transform.position.y;
+
+        GameObject BuildingGO = Instantiate(buildingObject, currentPosition, buildingRot);
         BuildingGO.transform.SetParent(BuildingsParent);
 
         BuildingEffects();
@@ -71,9 +72,9 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    public void GetBuildingType(BuildingInfo buildingInfoScript)
+    public void GetBuildingType()
     {
-        buildingInfo = buildingInfoScript;
+        buildingInfo = EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<BuildingInfo>();
     }
 
     private void UseResources()
@@ -92,7 +93,7 @@ public class BuildingManager : MonoBehaviour
     #endregion
 
     #region Check If Possible To Build
-    private bool CheckIfRequirementsAreMet()
+    public bool CheckIfRequirementsAreMet()
     {
         bool result = false;
 
@@ -118,17 +119,17 @@ public class BuildingManager : MonoBehaviour
         return result;
     }
 
-    private bool CheckIfThereIsPlaceForBuilding()
+    public bool CheckIfThereIsPlaceForBuilding()
     {
         bool result = false;
 
-        Collider[] colliders = Physics.OverlapBox(gridScript.WorldToGrid(hit.point), buildingInfo.prefab.transform.localScale * 0.9f);
+        Collider[] colliders = Physics.OverlapBox(gridScript.WorldToGrid(hit.point), buildingInfo.prefab.transform.localScale * 0.5f);
 
         if (colliders != null)
         {
             foreach (Collider coll in colliders)
             {
-                if (coll.tag == "Collider") 
+                if (coll.tag != "IgnoreRaycast") 
                 {
                     result = false;
                     break;

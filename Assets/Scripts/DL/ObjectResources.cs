@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class ObjectResources : MonoBehaviour
 {
-    public List<Resources> resources = new List<Resources>();
+    public List<Resource> resources = new List<Resource>();
 }

@@ -273,7 +273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &58922730
 GameObject:
@@ -339,7 +339,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &185639856
 GameObject:
@@ -453,10 +453,10 @@ MonoBehaviour:
       - m_Target: {fileID: 498890177}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: GetBuildingType
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 185639862}
-          m_ObjectArgumentAssemblyTypeName: BuildingInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -516,7 +516,7 @@ MonoBehaviour:
   isResourceBuilding: 0
   buildingName: House
   buildingType: 0
-  prefab: {fileID: 5352320503184487871, guid: fa0042d755daa254f92b1cf199fe3f2a, type: 3}
+  prefab: {fileID: 3829330803574857877, guid: 9e7743bf71b0ba54bb0538021c991874, type: 3}
   requiredResources:
   - resourceName: 0
     resourceAmount: 20
@@ -662,87 +662,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &385407859
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 385407860}
-  - component: {fileID: 385407863}
-  - component: {fileID: 385407862}
-  m_Layer: 0
-  m_Name: FieldSelection
-  m_TagString: IgnoreRaycast
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &385407860
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385407859}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 498890178}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &385407862
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385407859}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &385407863
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385407859}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &498890176
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridScript: {fileID: 219474767}
   BuildingsParent: {fileID: 669643711}
-  currentPosition: {x: 0, y: 0, z: 0}
+  buildingRot: {x: 0, y: 0, z: 0, w: 0}
   gameData: {fileID: 730027940}
   buildingInfo: {fileID: 1462286612}
 --- !u!4 &498890178
@@ -790,10 +709,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 385407860}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498890179
 MonoBehaviour:
@@ -807,7 +725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f1057c06d02bd439da2aeffe25d351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FieldSelection: {fileID: 385407859}
 --- !u!114 &498890180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +782,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &506100722
 MonoBehaviour:
@@ -879,10 +796,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc00d3ba10f264b48980fb21f5224cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapSize: 100
   mapObjects:
   - name: Maple
     objectPrefab: {fileID: 5958274758762299840, guid: ccec08103701afb41b2dfb4edb4fdd6e, type: 3}
-    spawnRate: 0.015
+    spawnRate: 0.02
     resources:
     - resourceName: 0
       resourceAmount: 20
@@ -890,7 +808,7 @@ MonoBehaviour:
       resourceAmount: -10
   - name: Pine
     objectPrefab: {fileID: 796950159436281656, guid: 72ccd91f1fb35be4fb278e6248d486ee, type: 3}
-    spawnRate: 0.02
+    spawnRate: 0.03
     resources:
     - resourceName: 0
       resourceAmount: 20
@@ -951,7 +869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
-  mouseSensitivity: 400
+  mouseSensitivity: 600
+  cameraSpeed: 300
 --- !u!1 &669643710
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730027941}
   - component: {fileID: 730027940}
+  - component: {fileID: 730027942}
   m_Layer: 0
   m_Name: GameData
   m_TagString: Untagged
@@ -1043,6 +963,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730027942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730027939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8ec358d6e98454ebe97f7c9345bf6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Plane: {fileID: 1308912636}
 --- !u!1 &732800309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,10 +1120,10 @@ MonoBehaviour:
       - m_Target: {fileID: 498890177}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: GetBuildingType
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 951998908}
-          m_ObjectArgumentAssemblyTypeName: BuildingInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1250,7 +1183,7 @@ MonoBehaviour:
   isResourceBuilding: 0
   buildingName: Big House
   buildingType: 1
-  prefab: {fileID: 5352320503184487871, guid: a2d8c1f614b0ef748986e8b0b2d3a25c, type: 3}
+  prefab: {fileID: 2636806892558660192, guid: 7c35af573bc39b94e89cf9f7da9d8383, type: 3}
   requiredResources:
   - resourceName: 0
     resourceAmount: 40
@@ -1476,7 +1409,38 @@ MonoBehaviour:
   - CelestialBodyTR: {fileID: 2018241613}
     isSun: 0
     xRot: 180
-  rotationSpeed: 0.28
+  rotationSpeed: 0.1
+--- !u!1 &1092548851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1092548852}
+  m_Layer: 0
+  m_Name: Planes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1092548852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092548851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1308912640}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1134946491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1600,7 @@ GameObject:
   - component: {fileID: 1308912638}
   - component: {fileID: 1308912637}
   m_Layer: 9
-  m_Name: Plane
+  m_Name: MainTerrain
   m_TagString: IgnoreRaycast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1712,12 +1676,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308912636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 23.45, y: 1, z: 23.45}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1092548852}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1328008029
 GameObject:
@@ -1850,7 +1814,7 @@ MonoBehaviour:
   isResourceBuilding: 0
   buildingName: Quarry
   buildingType: 2
-  prefab: {fileID: 5352320503184487871, guid: e0d4cd36c467d84478431852e5349f9a, type: 3}
+  prefab: {fileID: 3829330803574857877, guid: 9e7743bf71b0ba54bb0538021c991874, type: 3}
   requiredResources:
   - resourceName: 0
     resourceAmount: 50
@@ -1936,10 +1900,10 @@ MonoBehaviour:
       - m_Target: {fileID: 498890177}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: GetBuildingType
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1354295164}
-          m_ObjectArgumentAssemblyTypeName: BuildingInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2302,10 +2266,10 @@ MonoBehaviour:
       - m_Target: {fileID: 498890177}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: GetBuildingType
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1462286612}
-          m_ObjectArgumentAssemblyTypeName: BuildingInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2405,7 +2369,7 @@ MonoBehaviour:
   isResourceBuilding: 0
   buildingName: Lumber Mill
   buildingType: 3
-  prefab: {fileID: 5352320503184487871, guid: cfae37092558f0a49914930e03f05bd0, type: 3}
+  prefab: {fileID: 3829330803574857877, guid: 9e7743bf71b0ba54bb0538021c991874, type: 3}
   requiredResources:
   - resourceName: 0
     resourceAmount: 80
@@ -2491,10 +2455,10 @@ MonoBehaviour:
       - m_Target: {fileID: 498890177}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: GetBuildingType
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1501443195}
-          m_ObjectArgumentAssemblyTypeName: BuildingInfo, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2632,7 +2596,7 @@ RectTransform:
   - {fileID: 1388617633}
   - {fileID: 1134946492}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

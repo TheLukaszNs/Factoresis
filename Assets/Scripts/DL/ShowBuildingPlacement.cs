@@ -4,7 +4,7 @@ public class ShowBuildingPlacement : MonoBehaviour
 {
     private BuildingManager MainScript;
 
-    public GameObject FieldSelection;
+    private GameObject BuildingPreview;
 
     private Vector3 newBuildingPos;
 
@@ -15,22 +15,57 @@ public class ShowBuildingPlacement : MonoBehaviour
 
     void Update()
     {
-        BuildingInfo buildingInfo = MainScript.buildingInfo;
-
-        int buildingType = buildingInfo.buildingType;
-
-        newBuildingPos = MainScript.currentPosition;
+        int buildingType = MainScript.buildingInfo.buildingType;
 
         if (buildingType > -1)
         {
-            FieldSelection.SetActive(true);
+            if (BuildingPreview == null)
+            {
+                BuildingPreview = Instantiate(MainScript.buildingInfo.prefab);
+                Destroy(BuildingPreview.GetComponent<BoxCollider>());
 
-            FieldSelection.transform.position = new Vector3(newBuildingPos.x, FieldSelection.transform.position.y, newBuildingPos.z);
-            FieldSelection.transform.localScale = new Vector3(buildingInfo.prefab.transform.lossyScale.x * 2, FieldSelection.transform.localScale.y, buildingInfo.prefab.transform.lossyScale.z * 2);
+                BuildingPreview.GetComponent<Renderer>().sharedMaterial = Resources.Load("BuildingPreviewMat", typeof(Material)) as Material;
+            }
+
+            if (MainScript.CheckIfRequirementsAreMet() && MainScript.CheckIfThereIsPlaceForBuilding())
+            {
+                BuildingPreview.GetComponent<Renderer>().sharedMaterial.color = Color.white;
+                Debug.Log("Gooooood!");
+            }
+            else
+            {
+                BuildingPreview.GetComponent<Renderer>().sharedMaterial.color = Color.red;
+                Debug.Log("Nope!");
+            }
+
+            BuildingPreview.SetActive(true);
+
+            ChangePreviewPositionAndScale();
+            ChangeBuildingRotation();
         }
-        else
+        else if (BuildingPreview != null)
         {
-            FieldSelection.SetActive(false);
+            BuildingPreview.SetActive(false);
+        }
+    }
+
+    private void ChangePreviewPositionAndScale()
+    {
+        newBuildingPos = MainScript.gridScript.WorldToGrid(MainScript.hit.point);
+        newBuildingPos.y = MainScript.buildingInfo.prefab.transform.position.y;
+
+        BuildingPreview?.SetActive(true);
+
+        BuildingPreview.transform.position = new Vector3(newBuildingPos.x, BuildingPreview.transform.position.y, newBuildingPos.z);
+        BuildingPreview.transform.localScale = MainScript.buildingInfo.prefab.transform.lossyScale;
+    }
+
+    private void ChangeBuildingRotation()
+    {
+        if (Input.GetMouseButtonDown(2))
+        {
+            MainScript.buildingRot.eulerAngles += new Vector3(0f, 90f, 0f);
+            BuildingPreview.transform.rotation = MainScript.buildingRot;
         }
     }
 }

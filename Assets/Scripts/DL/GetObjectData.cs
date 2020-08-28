@@ -6,7 +6,7 @@ public class GetObjectData : MonoBehaviour
 {
     public Text objectInfoText;
 
-    public Resources[] objectResources;
+    public Resource[] objectResources;
 
     private RaycastHit hit;
 
@@ -43,7 +43,7 @@ public class GetObjectData : MonoBehaviour
     {
         objectInfoText.text = null;
 
-        foreach (Resources resources in objectResources)
+        foreach (Resource resources in objectResources)
         {
             objectInfoText.text += resources.resourceName + ": " + resources.resourceAmount.ToString() + "\n";
         }

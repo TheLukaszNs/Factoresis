@@ -4,11 +4,14 @@ public class CameraController : MonoBehaviour
 {
     public Camera mainCamera;   // Main Camera reference
 
+    private bool cameraMovementAllowed = true;
+
     [Range(1.0f, 1000.0f)]
     public float mouseSensitivity = 100.0f;  // Select sensitivity
     private float mainCameraXRotation;
     private const float defaultMainCameraXRotation = 45.0f; // value of Main Camera X Rotation on Start
-    private const float cameraSpeed = 100.0f;    // Camera Empty Object const speed
+    [Range(1.0f, 1000.0f)]
+    public float cameraSpeed = 100.0f;    // Camera Empty Object speed
     private const float margin = 10.0f;
     private const float zoom = 5.0f;
 
@@ -20,6 +23,11 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            cameraMovementAllowed = cameraMovementAllowed ? cameraMovementAllowed = false : cameraMovementAllowed = true;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;    // Get mouse X value
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 2.0f * Time.deltaTime;    // Get mouse Y value
 
@@ -33,7 +41,7 @@ public class CameraController : MonoBehaviour
         }
 
         // Zoom in
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0.0f && mainCamera.fieldOfView > 30.0f)
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0.0f && mainCamera.fieldOfView > 10.0f)
         {
             mainCamera.fieldOfView -= zoom;
         }
@@ -46,22 +54,25 @@ public class CameraController : MonoBehaviour
 
         else
         {
-            // Movement
-            if (Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y > Screen.height - margin)
+            if (cameraMovementAllowed)
             {
-                transform.Translate(Vector3.forward * cameraSpeed * Time.deltaTime);    // Forward
-            }
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x < margin)
-            {
-                transform.Translate(Vector3.left * cameraSpeed * Time.deltaTime);   // Left
-            }
-            if (Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y < margin)
-            {
-                transform.Translate(Vector3.back * cameraSpeed * Time.deltaTime);   // Backward
-            }
-            if (Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x > Screen.width - margin)
-            {
-                transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime);  // Right
+                // Movement
+                if (Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y > Screen.height - margin)
+                {
+                    transform.Translate(Vector3.forward * cameraSpeed * Time.deltaTime);    // Forward
+                }
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x < margin)
+                {
+                    transform.Translate(Vector3.left * cameraSpeed * Time.deltaTime);   // Left
+                }
+                if (Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y < margin)
+                {
+                    transform.Translate(Vector3.back * cameraSpeed * Time.deltaTime);   // Backward
+                }
+                if (Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x > Screen.width - margin)
+                {
+                    transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime);  // Right
+                }
             }
         }
     }
